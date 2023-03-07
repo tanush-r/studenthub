@@ -75,3 +75,14 @@ h2 {
   color:#43C6AC;
   font-size: large;
 }
+
+img {
+  width: 100px;
+}
+
+iframe {
+  position:absolute;
+}
+/* .btn-danger {
+  color:#ff3759;
+} */

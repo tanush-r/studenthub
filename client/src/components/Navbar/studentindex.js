@@ -2,12 +2,10 @@ import React from "react";
 import UserProfile from "../../pages/session/userprofile";
 import { Nav, NavLink, NavMenu, NavHead }
 	from "./NavbarElements";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
-export default function Navbar() {
-    const navigate = useNavigate();
-   
-
+export default function StudentNavbar() {
     return (
         <>
         <Nav>
@@ -25,12 +23,20 @@ export default function Navbar() {
                 <NavLink to="/students" activeStyle>
                     Students
                 </NavLink>
-                    <NavLink to="/sign-in" activeStyle>
-                        Sign In
-                    </NavLink> 
-                 
-            
-           
+                <NavLink to="/display-posts" activeStyle>
+                    All Posts
+                </NavLink> 
+                <NavLink to="/show-saved-posts" activeStyle>
+                    Saved
+                </NavLink>
+                {/* <Link to="/" className="btn btn-outline-success ml-4" onClick={
+                    axios.get("/session_logout_api")
+                }>Log Out</Link> */}
+                <Link to="/log-out" className="btn btn-outline-success ml-4" activeStyle>
+                Log Out
+                </Link> 
+              
+                         
             </NavMenu>
         </Nav>
         </>

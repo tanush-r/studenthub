@@ -6,28 +6,42 @@ import { useEffect, useState } from 'react';
 import Home from './pages';
 import About from './pages/about';
 import SignIn from './pages/signin';
-import SignUp from './pages/signup';
-import Teachers from './pages/teachers'
-import TeacherSignIn from './pages/teachersignin'
-import TeacherPosts from './pages/teacherposts';
-import UserProfile from './pages/session/userprofile';
+import TeacherSignUp from './pages/teacher/teachersignup';
+import Teachers from './pages/teacher/teachers'
+import TeacherSignIn from './pages/teacher/teachersignin'
+import TeacherPosts from './pages/teacher/teacherposts';
 import TeacherNavbar from './components/Navbar/teacherindex';
+import DisplayPosts from './pages/displayposts'
+import StudentSignUp from './pages/student/studentsignup';
+import StudentSignIn from './pages/student/studentsignin';
+import axios from 'axios';
+import LogOut from './logout';
+import Students from './pages/student/students';
+import StudentNavbar from './components/Navbar/studentindex';
+import DisplaySavedPosts from './pages/student/studentsavedposts';
+import ViewPdf from './pages/viewpdf';
 
 function App() {
-	const [data, setData] = useState("");
+	const [profile, setProfile] = useState("")
 	const [location, setLocation] = useState("");
-	useEffect(() => {
-			setData(UserProfile.getName('type'));
-			if ( data === null ) setData("");
-	      	}, [location]);
+	// const [loading,setLoading] = useState(false)
+	useEffect(
+		() => {axios.get("/session_details_api").then(
+			response => {
+				setProfile(response.data.type)
+			})
+		}, [location] )
 	const SettingLocation = () => {
 		setLocation(useLocation())
 	}
 	return (
 		<Router>
 		<SettingLocation />
-		{data === 'teacher' ?
-		<TeacherNavbar /> : <Navbar />}
+		{profile === 'teacher' ?
+		<TeacherNavbar /> : 
+		profile === 'student' ? 
+		<StudentNavbar /> : <Navbar />
+		}
 		<div class="container pt-4">
 			<Routes>
 				<Route path='/' element={<Home />} />
@@ -35,10 +49,15 @@ function App() {
 				<Route path='/sign-in' element={<SignIn/>} />
 				<Route path='/teacher-sign-in' element={<TeacherSignIn/>} />
 				<Route path='/teachers' element={<Teachers/>} />
-				<Route path='/sign-up' element={<SignUp/>} />
-				<Route path='/teacher-posts' element={
-					data === 'teacher' ? <TeacherPosts/> : <p className='text-danger'>Invalid link {data}</p>
-				} />
+				<Route path='/teacher-sign-up' element={<TeacherSignUp/>} />
+				<Route path='/teacher-posts' element={<TeacherPosts/>} />
+				<Route path='/display-posts' element={< DisplayPosts />} />
+				<Route path='/students' element={<Students/>} />
+				<Route path='/student-sign-in' element={<StudentSignIn/>} />
+				<Route path='/student-sign-up' element={<StudentSignUp/>} />
+				<Route path='/log-out' element={<LogOut/>} />
+				<Route path='/show-saved-posts' element={<DisplaySavedPosts />} />
+				<Route path='/view-pdf/:id' element={<ViewPdf />} />
 			</Routes>
 		</div>
 		</Router>

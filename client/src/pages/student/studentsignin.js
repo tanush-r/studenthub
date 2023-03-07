@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import UserProfile from './session/userprofile';
 
-export default function TeacherSignIn() {
+export default function StudentSignIn() {
     // States for redirect
     const navigate = useNavigate()
 
@@ -39,9 +38,9 @@ export default function TeacherSignIn() {
     const axiosGetCall = () => {
         const returnJSON = {
             "email": email,
-            "password": password
+            "password": password,
         }
-        axios.post('/sign_in_teacher', returnJSON).then(response => {
+        axios.post("/sign_in_student", returnJSON).then(response => {
             if(response.data.exists !== "yes") {
                 setSubmitted(false);
                 setError(true);
@@ -49,15 +48,7 @@ export default function TeacherSignIn() {
             } else {
                 setSubmitted(true);
                 setError(false);
-                const teacher = {
-                    "email": response.data.details[1],
-                    "name": response.data.details[2],
-                    "sem": response.data.details[5],
-                }
-                
-                UserProfile.setName('account',JSON.stringify(teacher))
-                UserProfile.setName('type','teacher')
-                navigate('/teacher-posts')
+                navigate('/display-posts')
             }
         });
     }
@@ -107,7 +98,7 @@ export default function TeacherSignIn() {
     return (
         <div className="form">
         <div>
-            <h1>Teacher Log In</h1>
+            <h1>Student Log In</h1>
         </div>
     
         {/* Calling to the methods */}

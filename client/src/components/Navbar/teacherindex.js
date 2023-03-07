@@ -3,6 +3,7 @@ import UserProfile from "../../pages/session/userprofile";
 import { Nav, NavLink, NavMenu, NavHead }
 	from "./NavbarElements";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function TeacherNavbar() {
     return (
@@ -20,10 +21,19 @@ export default function TeacherNavbar() {
                     Teachers
                 </NavLink>
               
-                    <NavLink to="/posts" activeStyle>
-                        Posts
+                    <NavLink to="/teacher-posts" activeStyle>
+                        Create Post
                     </NavLink> 
-                <Link to="/" className="btn btn-outline-success ml-4" onClick={UserProfile.clearProfile()}>Log Out</Link>
+                <NavLink to="/display-posts" activeStyle>
+                    All Posts
+                </NavLink> 
+                {/* <Link to="/" className="btn btn-outline-success ml-4" onClick={
+                    axios.get("/session_logout_api")
+                }>Log Out</Link> */}
+                <Link to="/log-out" className="btn btn-outline-success ml-4" activeStyle>
+                Log Out
+                </Link> 
+              
                          
             </NavMenu>
         </Nav>

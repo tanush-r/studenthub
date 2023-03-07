@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function SignUp() {
+export default function TeacherSignUp() {
 
 	const navigate = useNavigate()
 
@@ -87,7 +87,7 @@ const validatePhone = (phone) => {
 const axiosPostCall = () => {
     var classSet = "";
     if(class5A) classSet = "5A";
-    else if(class5A) classSet = "5B";
+    else if(class5B) classSet = "5B";
     else if(class5C) classSet = "5C";
     else classSet = "5D";
     const returnJSON = {

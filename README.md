@@ -3,8 +3,8 @@ Student Hub is a website which helps students connect woth teachers better. Teac
 
 ## Website View
 ![image.png](Screen_shots/dbms1.png)<br>
-![image2.png](image.png)<br>
-![image3.png](image.png)<br>
+![image2.png](Screen_shots/dbms2.png)<br>
+![image3.png](Screen_shots/dbms3.png)<br>
 
 ## Technologies Used
 <ol>
